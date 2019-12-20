@@ -52,16 +52,16 @@ avdmanager create avd -n emulator_name -k "system-images;android-24;default;x86_
 $ANDROID_HOME/tools/emulator -avd emulator_name
 
 ### Download Appium Desktop & Install 
-Open Appium Desktop and click <Edit configuration> button and set ANDROID_HOME and JAVA_HOME
-ANDROID_HOME = /usr/local/share/android-sdk
-For JAVA_HOME execute command in terminal and copy path
+Open Appium Desktop and click <Edit configuration> button and set ANDROID_HOME and JAVA_HOME  
+ANDROID_HOME = /usr/local/share/android-sdk  
+For JAVA_HOME execute command in terminal and copy path  
 echo $(/usr/libexec/java_home -v 1.8)
 
-Before running tests make sure that you set AWS credentials
-Open terminal (use the same terminal that you want user for running test because env vars with credentials must be executed in the same session as with the test)
+Before running tests make sure that you set AWS credentials  
+Open terminal (use the same terminal that you want user for running test because env vars with credentials must be executed in the same session as with the test)  
 
-export AWS_ACCESS_KEY_ID="Provided-AWS-KEY"
-export AWS_SECRET_ACCESS_KEY="Provided-AWS-Secret-key"
+export AWS_ACCESS_KEY_ID="Provided-AWS-KEY"  
+export AWS_SECRET_ACCESS_KEY="Provided-AWS-Secret-key"  
 
 ### Command to Run tests:
 mvn compile test -Ddebug=true -DsuiteFile=testng-login.xml -DdriverConfig=local_android_phone.json
