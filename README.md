@@ -69,3 +69,26 @@ mvn compile test -Ddebug=true -DsuiteFile=testng-login.xml -DdriverConfig=local_
 ### Locator Strategy
 The locator strategies I was trying to use were from the perspective of performance and effeciency. The most performant/efficient is selecting an element by it's accessbility Id (iOS) or contentDescription (Android) because you knock out to birds with one stone there in grabbing elements for accessibility tests as well as normal tests. The second best is by element id which is synonymous with accessiblity id for iOS but for android it is different than it's native accessibility selector. Typically those are added by app developers. Lastly there is XPath, which is the lowest performing and most brittle of all however is widely used. I try to only use XPath if i dont see other more stable ways of element locating.
 
+# NOTES on base test:
+Had to comment out this line of code from the Menu Chunk since it was blocking the debug test when logging the user in:
+
+protected void waitUntilVisible() {  
+	//syncHelper.waitForElementToAppear(getLocator(this, "getShowTutorialButton"));   
+}
+
+
+In AccountView it was necessary to update the android XPATH so that the account page assertion was looking for the correct locators and could pass the assertion:   
+@MobileElementLocator(android = "//android.view.View[@content-desc=\"test\"]", iOS = "//XCUIElementTypeOther[3]/XCUIElementTypeStaticText[1]")   
+protected Text getNameText() {   
+	return new Text(getLocator(this, "getNameText"));   
+}   
+
+@MobileElementLocator(android = "//android.view.View[@content-desc=\"Account\"]", iOS = "Account")
+protected Text getAccountHeaderText() {
+	return new Text(getLocator(this, "getAccountHeaderText"));
+}
+
+# Screenshots of grabbing selectors with Appium:
+![Alt text](/example1.png?raw=true "Optional Title")
+![Alt text](/example2.png?raw=true "Optional Title")
+![Alt text](/example3.png?raw=true "Optional Title")
